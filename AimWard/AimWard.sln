@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.8
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AimWard", "AimWard\AimWard.csproj", "{F2379C4C-F12D-4F20-90E1-1E2840610CFA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F2379C4C-F12D-4F20-90E1-1E2840610CFA}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{F2379C4C-F12D-4F20-90E1-1E2840610CFA}.Debug|Any CPU.Build.0 = Debug|x86
+		{F2379C4C-F12D-4F20-90E1-1E2840610CFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2379C4C-F12D-4F20-90E1-1E2840610CFA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {762BD008-CACF-469D-B28A-66ACABE9638E}
+	EndGlobalSection
+EndGlobal

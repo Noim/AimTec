@@ -1,0 +1,9 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/AimWard/.vs/AimWard
+/AimWard/AimWard/bin/Debug
+/AimWard/AimWard/bin/Release
+/AimWard/AimWard/bin
+/AimWard/AimWard/obj
