@@ -86,7 +86,7 @@ namespace AimWard.Fuctions
             }
         }
 
-        public static Vector3? ScanWardLocation(Vector3 cursorPosition)
+        public static Vector3? ScanWardLocation()
         {
             foreach (Vector3 wardPos in WardLocations)
             {
@@ -100,10 +100,160 @@ namespace AimWard.Fuctions
         public static void DrawWardLocation()
         {
             foreach (Vector3 wardPos in WardLocations)
-            { 
+            {
                 if (Program.Player.ServerPosition.Distance(wardPos) < AimMenu.Menu["drawDistanceFromWard"].As<MenuSlider>().Value)
                     Render.Circle(wardPos, 30.0f, 100, ((wardPos.Distance(Game.CursorPos) <= 250.0) ? Color.Red : Color.LawnGreen));
             }
+        }
+
+        private static List<WallWardData> wallWardLocations;
+        public static List<WallWardData> WallWardLocations
+        {
+            get
+            {
+                if (wallWardLocations == null)
+                {
+                    wallWardLocations = new List<WallWardData>
+                    {
+                        // Blue Side - Red Buff
+				        new WallWardData(new Vector3(8038.775f, 53.72073f, 4275.063f),
+                                        new Vector3(8461.842f, 50.60168f, 4654.9f),
+                                        new Vector3(8523.9f, 51.24f, 4707.76f)),
+
+                        // Blue Side - Golems To Red Buff
+				        new WallWardData(new Vector3(8257.502f, 51.13f, 2910.066f),
+                                        new Vector3(8170.634f, 51.76062f, 3438.465f),
+                                        new Vector3(8170.634f, 51.76062f, 3438.465f)),
+
+                        // Blue Side - Tower To Jungle
+				        new WallWardData(new Vector3(6874.0f, 50.52f, 1708.0f),
+                                        new Vector3(6849.11f, 50.52f, 2252.01f),
+                                        new Vector3(6723.9f, 52.17f, 2507.76f)),
+
+                        // Blue Side - Top Mid To River
+				        new WallWardData(new Vector3(5980.0f, 51.65339f, 7554.0f),
+                                        new Vector3(6197.479f, -67.07629f, 8112.845f),
+                                        new Vector3(6197.479f, -67.07629f, 8112.845f)),
+
+                        // Blue Side - Mid River To Ambush
+				        new WallWardData(new Vector3(5795.822f, -70.93462f, 8384.079f),
+                                            new Vector3(5252.114f, 29.05359f, 8238.521f),
+                                            new Vector3(5123.9f, -21.23f, 8457.76f)),
+
+                        // Blue Side - Bottom Mid To River
+				        new WallWardData(new Vector3(7784.667f, 51.91295f, 6007.736f),
+                                        new Vector3(8248.607f, -71.24072f, 6421.765f),
+                                        new Vector3(8248.607f, -71.24072f, 6421.765f)),
+
+                        // Blue Side - Jungle To River
+				        new WallWardData(new Vector3(2750.054f, 54.3255f, 10319.73f),
+                                        new Vector3(2905.962f, -76.8251f, 10815.45f),
+                                        new Vector3(3022.79f, -68.84045f, 10788.25f)),
+
+                        // Blue Side - Top To River
+				        new WallWardData(new Vector3(1774.0f, 52.8381f, 10901.75f),
+                                        new Vector3(2381.939f, -71.2406f, 11021.48f),
+                                        new Vector3(2821.113f, -71.24036f, 11254.26f)),
+
+                        // Baron To Tri
+				        new WallWardData(new Vector3(4729.881f, -71.2406f, 10839.61f),
+                                        new Vector3(4532.287f, 51.24414f, 11418.29f),
+                                        new Vector3(4521.676f, 51.98792f, 11469.82f)),
+
+                        // Dragon To Tri
+				        new WallWardData(new Vector3(10072.0f, -71.24f, 3908.0f),
+                                        new Vector3(10297.93f, 49.03f, 3358.59f),
+                                        new Vector3(10273.9f, 49.03f, 3257.76f)),
+
+				        // Purple Side - Jungle To River
+				        new WallWardData(new Vector3(12422.0f, 51.7294f, 4508.0f),
+                                        new Vector3(12353.94f, 51.73f, 4031.58f),
+                                        new Vector3(11960.99f, -66.58813f, 3932.363f)),
+
+                        // Purple Side - Top Mid To River
+				        new WallWardData(new Vector3(7287.894f, 52.8726f, 8520.936f),
+                                        new Vector3(6790.03f, -71.24072f, 8562.474f),
+                                        new Vector3(6790.03f, -71.24072f, 8562.474f)),
+
+                        // Purple Side - Bottom Mid To River
+				        new WallWardData(new Vector3(9072.0f, 53.04f, 7158.0f),
+                                        new Vector3(8705.95f, 53.04f, 6819.1f),
+                                        new Vector3(8654.766f, -71.24072f, 6741.225f)),
+
+                        // Purple Side - Golems To Red Buff
+				        new WallWardData(new Vector3(6574.0f, 56.48f, 12006.0f),
+                                        new Vector3(6678.08f, 56.48f, 11477.83f),
+                                        new Vector3(6678.08f, 53.85f, 11477.83f)),
+
+                        // Purple Side - Tower To Jungle
+				        new WallWardData(new Vector3(8127.036f, 52.8381f, 13187.44f),
+                                        new Vector3(8227.608f, 56.52844f, 12676.1f),
+                                        new Vector3(8323.9f, 56.48f, 12457.76f)),
+
+                        // Purple Side - Mid River To Ambush
+                        new WallWardData(new Vector3(9028.257f, -71.2406f, 6551.627f),
+                                            new Vector3(9642.994f, 24.96692f, 6642.71f),
+                                            new Vector3(9773.9f, 9.56f, 6457.76f))
+                    };
+                }
+
+                return wallWardLocations;
+            }
+        }
+
+        public static WallWardData ScanWallWardLocation()
+        {
+            foreach (WallWardData wardPos in WallWardLocations)
+            {
+                if (wardPos.WallLocation.Distance(Game.CursorPos) <= 100.0 && wardPos.WallLocation.Distance(Program.Player.Position) <= 400.0)
+                    return wardPos;
+            }
+
+            return null;
+        }
+
+        public static void DrawWallWardLocation()
+        {
+            foreach (WallWardData wardPos in WallWardLocations)
+            {
+                Color wardColor = (wardPos.WallLocation.Distance(Game.CursorPos) <= 100.0) ? Color.Red : Color.LawnGreen;
+                Color arrowColor = (wardPos.WallLocation.Distance(Game.CursorPos) <= 250.0) ? Color.Green : Color.FromArgb(0, 255, 255, 255);
+
+                if (Program.Player.ServerPosition.Distance(wardPos.WallLocation) < AimMenu.Menu["drawDistanceFromWard"].As<MenuSlider>().Value)
+                {
+                    Render.Circle(wardPos.WardPosition, 30.0f, 100, wardColor);
+                    Render.Circle(wardPos.WallLocation, 100.0f, 100, wardColor);
+
+                    Vector3 directionVector = (wardPos.WardPosition - wardPos.WallLocation);
+                    directionVector.Normalize();
+
+                    float length = (wardPos.WardPosition - wardPos.WallLocation).Length;
+
+                    Vector3 finalLocation = new Vector3(wardPos.WallLocation.X + (directionVector.X * length),
+                                                    wardPos.WallLocation.Y + (directionVector.Y * length),
+                                                    wardPos.WallLocation.Z + (directionVector.Z * length));
+
+                    Render.WorldToScreen(wardPos.WallLocation, out Vector2 screenMagneticPos);
+                    Render.WorldToScreen(finalLocation, out Vector2 screenDirectionVector);
+                    Render.Line(screenMagneticPos, screenDirectionVector, 2f, true, arrowColor);
+                }
+            }
+        }
+    }
+
+    public class WallWardData
+    {
+        public Vector3 WallLocation { get; private set; }
+
+        public Vector3 PlaceLocation { get; private set; }
+
+        public Vector3 WardPosition { get; private set; }
+
+        public WallWardData(Vector3 wallLocation, Vector3 placeLocation, Vector3 wardPosition)
+        {
+            WallLocation = wallLocation;
+            PlaceLocation = placeLocation;
+            WardPosition = wardPosition;
         }
     }
 }

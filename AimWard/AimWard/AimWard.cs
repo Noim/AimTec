@@ -8,6 +8,7 @@ using System.Linq;
 
 using AimWard.Menus;
 using AimWard.Fuctions;
+using Aimtec.SDK.Extensions;
 
 namespace AimWard
 {
@@ -33,6 +34,7 @@ namespace AimWard
             if (AimMenu.Menu["drawWardLocation"].As<MenuBool>().Value)
             {
                 Functions.DrawWardLocation();
+                Functions.DrawWallWardLocation();
             }
         }
 
@@ -45,22 +47,33 @@ namespace AimWard
                 if (wardSpellSlot == SpellSlot.Unknown || lastWardTick + 1000 > Environment.TickCount)
                     return;
 
-                Vector3? nearestWard = Functions.ScanWardLocation(new Vector3(Game.CursorPos.X, Game.CursorPos.Z, Game.CursorPos.Y));
+                Vector3? nearestWard = Functions.ScanWardLocation();
 
                 if (nearestWard != null && wardSpellSlot != SpellSlot.Unknown)
-                {
-                    Player.SpellBook.CastSpell(wardSpellSlot, (Vector3)nearestWard);
-                    lastWardTick = Environment.TickCount;
-                }
+                    if(Player.SpellBook.CastSpell(wardSpellSlot, (Vector3)nearestWard))
+                        lastWardTick = Environment.TickCount;
+
+                WallWardData nearestWallWard = Functions.ScanWallWardLocation();
+
+                if (nearestWallWard != null)
+                        Player.IssueOrder(OrderType.MoveTo, nearestWallWard.WallLocation);
+
+                //Console.WriteLine(Game.CursorPos.ToString());
+                //Console.WriteLine(Player.ServerPosition.ToString());
+
+                if (nearestWallWard != null && nearestWallWard.PlaceLocation.Distance(Player.ServerPosition) <= 640.0)
+
+                    if(Player.SpellBook.CastSpell(wardSpellSlot, nearestWallWard.PlaceLocation))
+                        lastWardTick = Environment.TickCount;
             }
         }
 
         private static SpellSlot GetGoodWard()
         {
-            foreach(string ward in normalWards)
+            foreach (string ward in normalWards)
             {
                 SpellSlot wardSlot = Player.SpellBook.Spells.FirstOrDefault(x => !String.IsNullOrEmpty(x.Name) && x.Name.ToLower() == ward)?.Slot ?? SpellSlot.Unknown;
-                if(wardSlot != SpellSlot.Unknown)
+                if (wardSlot != SpellSlot.Unknown)
                 {
                     if (Player.SpellBook.GetSpellState(wardSlot) == SpellState.Ready)
                         return wardSlot;
